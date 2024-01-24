@@ -154,7 +154,7 @@
 <style scoped>
 main {
   background: #fde4cf;
-  height: 85vh;
+  height: 85%;
 }
 
 main #search {

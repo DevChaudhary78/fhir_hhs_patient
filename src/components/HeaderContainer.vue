@@ -23,7 +23,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fbf8cc;
+  background: var(--main-bg-h-f);
   color: var(--light-black);
   padding: 1rem;
 }
