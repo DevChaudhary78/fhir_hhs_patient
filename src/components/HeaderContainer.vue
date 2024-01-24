@@ -24,6 +24,7 @@ header {
   align-items: center;
   justify-content: space-between;
   background: #fbf8cc;
+  color: var(--light-black);
   padding: 1rem;
 }
 
@@ -42,7 +43,7 @@ nav>ul>a {
   background: #ffcfd2;
   padding: 0.3rem;
   border-radius: 0.2rem;
-  color: #003049;
+  color: var(--light-black);
   margin: 0 1rem;
 }
 
