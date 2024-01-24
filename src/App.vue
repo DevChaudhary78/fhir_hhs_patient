@@ -1,5 +1,13 @@
 <template>
-  <h1>
-    Hello World
-  </h1>
+  <div id="hero">
+    <HeaderContainer />
+    <MainContainer />
+    <FooterContainer />
+  </div>
 </template>
+
+<script setup lang="ts">
+import MainContainer from './components/MainContainer.vue'
+import HeaderContainer from './components/HeaderContainer.vue'
+import FooterContainer from './components/FooterContainer.vue'
+</script>
