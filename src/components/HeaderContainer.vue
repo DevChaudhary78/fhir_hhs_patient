@@ -18,10 +18,10 @@
 
 <style scoped>
 header {
-  height: 10%;
   width: 100%;
+  height: 8%;
   display: flex;
-  align-content: center;
+  align-items: center;
   justify-content: space-around;
   background: bisque;
 }
