@@ -165,6 +165,30 @@ main #search {
   height: 5%;
 }
 
+#search input {
+  height: 2rem;
+  width: 20rem;
+  border: none;
+  padding: 0.7rem;
+  font-weight: bold;
+  border-radius: 0.3rem;
+}
+
+#search button {
+  height: 2rem;
+  width: 4rem;
+  border-radius: 0.3rem;
+  border: none;
+  margin: 0 0.3rem;
+  font-weight: bold;
+  background: #a3c4f3;
+  cursor: pointer;
+}
+
+#search button:hover {
+  background: #90dbf4;
+}
+
 main>#card_container {
   height: 90%;
   display: grid;
