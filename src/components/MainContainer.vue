@@ -4,127 +4,9 @@
       <input type="text" placeholder="Search Patient">
       <button type="submit">Search</button>
     </form>
-    <div id="card_container">
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
-      <div id="card">
-        <h3>John Doe</h3>
-        <p><span>Address: </span>100 Main St E</p>
-        <p><span>Contact: </span>chaudharyd@hhsc.ca</p>
-        <a href="#">Details</a>
-      </div>
+    <div v-if="loading">Loading ...</div>
+    <div v-else id="card_container">
+      <Card v-for="patient in patients" :patient="patient" :key="patient.resource.id" />
     </div>
     <nav id="pagination">
       <ul>
@@ -150,6 +32,42 @@
     </nav>
   </main>
 </template>
+
+<script lang="ts" setup>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+
+import Card from "./helpers/CardContainer.vue";
+
+interface ApiResponse {
+  entry: []
+}
+
+interface Patient {
+  resource: {
+    id: string
+  }
+}
+
+const patients = ref<Patient[]>([]);
+const loading = ref(true);
+
+
+const fetchPatients = async () => {
+  try {
+    const response = await axios.get<ApiResponse>("https://hapi.fhir.org/baseR4/Patient");
+    patients.value = response.data.entry;
+    loading.value = false;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+  }
+}
+
+onMounted(() => {
+  fetchPatients();
+})
+
+</script>
 
 <style scoped>
 main {
@@ -198,15 +116,6 @@ main>#card_container {
   grid-template-rows: 1fr 1fr 1fr 1fr;
 }
 
-#card {
-  border-radius: 0.3rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  background: #ffcfd2;
-}
-
 nav ul {
   display: flex;
   margin: 0 auto;
@@ -226,14 +135,5 @@ nav ul a:hover {
 
 nav ul a li {
   list-style: none;
-}
-
-#card h3 {
-  font-weight: bolder;
-  font-size: 1.5rem;
-}
-
-#card span {
-  font-weight: bold;
 }
 </style>
