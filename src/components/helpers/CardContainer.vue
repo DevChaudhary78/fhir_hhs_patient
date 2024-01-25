@@ -51,7 +51,14 @@ const { patient } = defineProps(['patient'])
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  background: #ffcfd2;
+  background: #8ecae6;
+}
+
+#card:hover {
+  scale: 1.02;
+  cursor: pointer;
+  background: #219ebc;
+  color: white;
 }
 
 #card h3 {
