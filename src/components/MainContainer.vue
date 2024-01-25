@@ -8,7 +8,7 @@
     <div v-else id="card_container">
       <Card v-for="patient in patients" :patient="patient" :key="patient.resource.id" />
     </div>
-    <nav id="pagination">
+    <nav v-if="!loading" id="pagination">
       <ul>
         <a href="#">
           <li>Prev</li>
@@ -105,7 +105,7 @@ main #search {
   background: #90dbf4;
 }
 
-main > #card_container {
+main>#card_container {
   height: 90%;
   display: grid;
   padding: 1rem;
