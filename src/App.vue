@@ -1,7 +1,8 @@
 <template>
   <div id="hero">
     <HeaderContainer />
-    <MainContainer />
+    <router-view>
+    </router-view>
     <FooterContainer />
   </div>
 </template>
