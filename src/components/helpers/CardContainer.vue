@@ -22,7 +22,7 @@
 <script lang="ts" setup>
 import { defineProps } from "vue";
 
-const props = defineProps(['patient'])
+const { patient } = defineProps(['patient'])
 </script>
 
 <style scoped>
