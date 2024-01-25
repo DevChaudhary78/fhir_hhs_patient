@@ -16,14 +16,11 @@
     </p>
 
     <!-- Contact -->
-    <p
-      v-if="
-        patient.resource &&
-        patient.resource.telecom &&
-        patient.resource.telecom[0] &&
-        patient.resource.telecom[0].system === 'phone'
-      "
-    >
+    <p v-if="patient.resource &&
+      patient.resource.telecom &&
+      patient.resource.telecom[0] &&
+      patient.resource.telecom[0].system === 'phone'
+      ">
       <span>Phone NO: </span>
       {{ patient.resource.telecom[0].value }}
     </p>
@@ -35,9 +32,7 @@
       <span>No contact information available</span>
     </p>
 
-    <router-link :to="{ name: 'PatientDetails', params: { patientId: patient?.resource?.id } }"
-      >Details</router-link
-    >
+    <router-link :to="{ name: 'PatientDetails', params: { patientId: patient?.resource?.id } }">Details</router-link>
   </div>
 </template>
 
@@ -59,6 +54,7 @@ const { patient } = defineProps(['patient'])
   align-items: center;
   justify-content: space-around;
   background: #8ecae6;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 #card:hover {
