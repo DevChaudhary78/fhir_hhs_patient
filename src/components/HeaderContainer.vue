@@ -41,7 +41,7 @@ nav>ul>a {
   text-decoration: none;
   font-size: 1.3rem;
   background: #ffcfd2;
-  padding: 0.3rem;
+  padding: 0.3rem 1rem;
   border-radius: 0.2rem;
   color: var(--light-black);
   margin: 0 1rem;
