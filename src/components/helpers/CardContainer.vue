@@ -2,18 +2,33 @@
   <div id="card">
     <h3>{{ patient?.resource?.name[0]?.family }}, {{ patient?.resource?.name[0]?.given[0] }}</h3>
     <p><span>ID: </span>{{ patient?.resource?.id }}</p>
-    <p>
+
+    <!-- Address -->
+    <p v-if="patient.resource.address" class="address_container">
       <span>Address: </span>
-      100 Main St. E.
-      Hamilton
-      L8N 3W4
-    </p>
-    <p v-if="true">
-      <span>Phone NO: </span> (437) 599-6355
+      {{ patient.resource.address[0].line[0] }}, {{ patient.resource.address[0].city }},
+      {{ patient.resource.address[0].state }}, {{ patient.resource.address[0].country }},
+      {{ patient.resource.address[0].postalCode }}
     </p>
     <p v-else>
-      <span>Email: </span> chaudharyd@hhsc.ca
+      <span>Address: </span>
+      N/A
     </p>
+
+    <!-- Contact -->
+    <p
+      v-if="patient.resource && patient.resource.telecom && patient.resource.telecom[0] && patient.resource.telecom[0].system === 'phone'">
+      <span>Phone NO: </span>
+      {{ patient.resource.telecom[0].value }}
+    </p>
+    <p v-else-if="patient.resource && patient.resource.telecom && patient.resource.telecom[0]">
+      <span>Email: </span>
+      {{ patient.resource.telecom[0].value }}
+    </p>
+    <p v-else>
+      <span>No contact information available</span>
+    </p>
+
     <a href="#">Details</a>
   </div>
 </template>
@@ -26,6 +41,10 @@ const { patient } = defineProps(['patient'])
 </script>
 
 <style scoped>
+.address_container {
+  text-align: center;
+}
+
 #card {
   border-radius: 0.3rem;
   display: flex;
