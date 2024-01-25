@@ -29,7 +29,7 @@
       <span>No contact information available</span>
     </p>
 
-    <a href="#">Details</a>
+    <router-link :to="{ name: 'PatientDetails', params: { patientId: patient?.resource?.id } }">Details</router-link>
   </div>
 </template>
 
