@@ -28,6 +28,7 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
+    "src/assets/interfaces/**/*.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
