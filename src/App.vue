@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import MainContainer from './components/MainContainer.vue'
 import HeaderContainer from './components/HeaderContainer.vue'
 import FooterContainer from './components/FooterContainer.vue'
 </script>
