@@ -1,26 +1,41 @@
 <template>
   <div class="patient-summary">
     <div class="header">
-      <h2>{{ patient?.name[0].given[0] }} {{ patient?.name[0].family }}</h2>
-      <p>Identifier: {{ patient?.identifier[0].value }}</p>
+
+      <h2 v-if="patient?.name">{{ patient?.name[0].given[0] }} {{ patient?.name[0].family }}</h2>
+      <h2 v-else>Name Not Specified</h2>
+
+      <p v-if="patient?.identifier">Identifier: {{ patient?.identifier[0].value }}</p>
+      <p v-else>Identifier: Not Specified</p>
+
     </div>
     <div class="body">
       <div class="section">
         <h3>Contact Information</h3>
-        <p><strong>Phone:</strong> {{ patient?.telecom[0].value }}</p>
+
+        <p v-if="patient?.telecom"><strong>Phone:</strong> {{ patient?.telecom[0].value }}</p>
+        <p v-else><strong>Phone:</strong> Not Specified</p>
+
       </div>
       <div class="section">
         <h3>Address</h3>
-        <p>
+
+        <p v-if="patient?.address">
           {{ patient?.address[0].line[0] }}, {{ patient?.address[0].city }},
           {{ patient?.address[0].state }} {{ patient?.address[0].postalCode }},
           {{ patient?.address[0].country }}
         </p>
+        <p v-else>Not Specifed</p>
+
       </div>
       <div class="section">
         <h3>Personal Information</h3>
-        <p><strong>Gender:</strong> {{ patient?.gender }}</p>
-        <p><strong>Date of Birth:</strong> {{ patient?.birthDate }}</p>
+
+        <p v-if="patient?.gender"><strong>Gender:</strong> {{ patient?.gender }}</p>
+        <p v-else><strong>Gender:</strong> Not Specified</p>
+
+        <p v-if="patient?.birthDate"><strong>Date of Birth:</strong> {{ patient?.birthDate }}</p>
+        <p v-else><strong>Date of Birth:</strong> Not Specified</p>
       </div>
     </div>
   </div>
