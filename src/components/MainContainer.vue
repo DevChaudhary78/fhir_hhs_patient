@@ -1,7 +1,7 @@
 <template>
   <main>
     <form id="search">
-      <input type="text" placeholder="Search Patient">
+      <input type="text" placeholder="Search Patient" />
       <button type="submit">Search</button>
     </form>
     <div v-if="loading">Loading ...</div>
@@ -34,10 +34,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
 
-import Card from "./helpers/CardContainer.vue";
+import Card from './helpers/CardContainer.vue'
 
 interface ApiResponse {
   entry: []
@@ -49,24 +49,22 @@ interface Patient {
   }
 }
 
-const patients = ref<Patient[]>([]);
-const loading = ref(true);
-
+const patients = ref<Patient[]>([])
+const loading = ref(true)
 
 const fetchPatients = async () => {
   try {
-    const response = await axios.get<ApiResponse>("https://hapi.fhir.org/baseR4/Patient");
-    patients.value = response.data.entry;
-    loading.value = false;
+    const response = await axios.get<ApiResponse>('https://hapi.fhir.org/baseR4/Patient')
+    patients.value = response.data.entry
+    loading.value = false
   } catch (error) {
-    console.error("Error fetching data: ", error);
+    console.error('Error fetching data: ', error)
   }
 }
 
 onMounted(() => {
-  fetchPatients();
+  fetchPatients()
 })
-
 </script>
 
 <style scoped>
@@ -107,7 +105,7 @@ main #search {
   background: #90dbf4;
 }
 
-main>#card_container {
+main > #card_container {
   height: 90%;
   display: grid;
   padding: 1rem;

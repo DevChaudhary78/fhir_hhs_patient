@@ -1,23 +1,22 @@
 export interface Patient {
   name: {
-    given: string[];
-    family: string;
-  }[];
+    given: string[]
+    family: string
+  }[]
   identifier: {
-    value: string;
-  }[];
+    value: string
+  }[]
   telecom: {
-    value: string;
-  }[];
+    value: string
+  }[]
   address: {
-    use: string;
-    line: string[];
-    city: string;
-    state: string;
-    postalCode: string;
-    country: string;
-  }[];
-  gender: string;
-  birthDate: string;
+    use: string
+    line: string[]
+    city: string
+    state: string
+    postalCode: string
+    country: string
+  }[]
+  gender: string
+  birthDate: string
 }
-

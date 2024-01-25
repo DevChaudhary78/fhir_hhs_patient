@@ -17,7 +17,13 @@
 
     <!-- Contact -->
     <p
-      v-if="patient.resource && patient.resource.telecom && patient.resource.telecom[0] && patient.resource.telecom[0].system === 'phone'">
+      v-if="
+        patient.resource &&
+        patient.resource.telecom &&
+        patient.resource.telecom[0] &&
+        patient.resource.telecom[0].system === 'phone'
+      "
+    >
       <span>Phone NO: </span>
       {{ patient.resource.telecom[0].value }}
     </p>
@@ -29,13 +35,14 @@
       <span>No contact information available</span>
     </p>
 
-    <router-link :to="{ name: 'PatientDetails', params: { patientId: patient?.resource?.id } }">Details</router-link>
+    <router-link :to="{ name: 'PatientDetails', params: { patientId: patient?.resource?.id } }"
+      >Details</router-link
+    >
   </div>
 </template>
 
-
 <script lang="ts" setup>
-import { defineProps } from "vue";
+import { defineProps } from 'vue'
 
 const { patient } = defineProps(['patient'])
 </script>

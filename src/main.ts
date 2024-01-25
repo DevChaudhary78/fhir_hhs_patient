@@ -8,8 +8,12 @@ import MainContainer from './components/MainContainer.vue'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {path: '/', component: MainContainer},
-    {path: '/patient/:patientId', name: 'PatientDetails', component: () => import('./views/PatientDetails.vue')}
+    { path: '/', component: MainContainer },
+    {
+      path: '/patient/:patientId',
+      name: 'PatientDetails',
+      component: () => import('./views/PatientDetails.vue')
+    }
   ]
 })
 
