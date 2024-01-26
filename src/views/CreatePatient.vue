@@ -5,11 +5,11 @@
         <h3>Personal Information</h3>
         <div class="first">
           <label for="first_name">First Name: </label>
-          <input type="text" id="first_name" placeholder="John" v-model="patientInfo.firstName" required>
+          <input type="text" id="first_name" placeholder="John" v-model="patientInfo.firstName" required> *
         </div>
         <div class="last">
           <label for="last_name">Last Name: </label>
-          <input type="text" id="last_name" placeholder="Doe" v-model="patientInfo.lastName" required>
+          <input type="text" id="last_name" placeholder="Doe" v-model="patientInfo.lastName" required> *
         </div>
         <div class="gender">
           <label for="gender">Gender: </label>
@@ -17,11 +17,11 @@
             <option value="" selected hidden disabled>Choose</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
-          </select>
+          </select> *
         </div>
         <div class="dob">
           <label for="dob">Gender: </label>
-          <input type="date" id="dob" v-model="patientInfo.dob" required>
+          <input type="date" id="dob" v-model="patientInfo.dob" required> *
         </div>
       </div>
 
@@ -29,12 +29,12 @@
         <h3>Contact</h3>
         <div class="email">
           <label for="email">Email: </label>
-          <input type="email" id="email" placeholder="john@doe.ca" v-model="patientInfo.email" required>
+          <input type="email" id="email" placeholder="john@doe.ca" v-model="patientInfo.email" required> *
         </div>
 
         <div class="phone">
           <label for="phone">Phone: </label>
-          <input type="tel" id="phone" placeholder="1234567890" v-model="patientInfo.phone" required>
+          <input type="tel" id="phone" placeholder="1234567890" v-model="patientInfo.phone" required> *
         </div>
       </div>
 
@@ -42,15 +42,15 @@
         <h3>Address</h3>
         <div class="street">
           <label for="street">Street: </label>
-          <input type="text" id="street" placeholder="188 Queen St. S." v-model="patientInfo.street" required>
+          <input type="text" id="street" placeholder="188 Queen St. S." v-model="patientInfo.street" required> *
         </div>
         <div class="city">
           <label for="city">City: </label>
-          <input type="text" id="city" placeholder="San Jose" v-model="patientInfo.city" required>
+          <input type="text" id="city" placeholder="San Jose" v-model="patientInfo.city" required> *
         </div>
         <div class="postal">
           <label for="postal">Postal/Zip Code: </label>
-          <input type="text" id="postal" placeholder="L9P3T9 / 342112" v-model="patientInfo.postal" required>
+          <input type="text" id="postal" placeholder="L9P3T9 / 342112" v-model="patientInfo.postal" required> *
         </div>
         <div class="country">
           <label for="postal">Country: </label>
@@ -59,9 +59,16 @@
             <option value="CA" selected>Canada</option>
             <option value="IN">India</option>
             <option value="US">USA</option>
-          </select>
+          </select> *
         </div>
       </div>
+
+      <div id="identifier">
+        <h3>Identifier</h3>
+        <label for="identifier">Identifier: </label>
+        <input type="text" id="identifier" placeholder="AnyStringYouLike3">
+      </div>
+
       <input type="submit" value="Submit" id="submit">
     </form>
   </div>
@@ -114,7 +121,7 @@ form {
   background: #415a77;
   color: #e0e1dd;
   border-radius: 0.3rem;
-  margin: 0 1rem;
+  margin: 1rem;
 }
 
 h3 {
@@ -123,9 +130,7 @@ h3 {
   margin-bottom: 10px;
 }
 
-#personal>div,
-#contact>div,
-#address>div {
+form>div>div {
   margin: 1rem;
 }
 
