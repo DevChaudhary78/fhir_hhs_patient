@@ -38,7 +38,7 @@ nav>ul {
 nav>ul>a {
   text-decoration: none;
   font-size: 1.3rem;
-  background: #ffcfd2;
+  background: #22223b;
   padding: 0.3rem 1rem;
   border-radius: 0.2rem;
   color: var(--light-black);

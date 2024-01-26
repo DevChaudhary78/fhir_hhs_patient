@@ -7,6 +7,7 @@
 <style scoped>
 footer {
   background: var(--main-bg-h-f);
+  color: var(--light-black);
   height: 7%;
   display: flex;
   justify-content: center;

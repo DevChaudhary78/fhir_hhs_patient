@@ -69,8 +69,9 @@ onMounted(() => {
 
 <style scoped>
 main {
-  background: #fde4cf;
+  background: var(--main-container-bg);
   height: 85%;
+  padding: 2rem;
 }
 
 main #search {

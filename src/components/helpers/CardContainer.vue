@@ -53,7 +53,7 @@ const { patient } = defineProps(['patient'])
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  background: #8ecae6;
+  background: #e0e1dd;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
 
