@@ -1,7 +1,7 @@
 <template>
   <main>
-    <form id="search">
-      <input type="text" placeholder="Search Patient" />
+    <form id="search" @submit.prevent="patientDetails">
+      <input type="text" placeholder="Search Patient" v-model="patientId" />
       <button type="submit">Search</button>
     </form>
     <div v-if="loading">Loading ...</div>
@@ -34,10 +34,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 import axios from 'axios'
 
 import Card from './helpers/CardContainer.vue'
+import type { Router } from 'vue-router';
 
 interface ApiResponse {
   entry: []
@@ -49,8 +50,16 @@ interface Patient {
   }
 }
 
+const router = inject<Router>('router');
 const patients = ref<Patient[]>([])
 const loading = ref(true)
+const patientId = ref('')
+
+const patientDetails = () => {
+  if (router) {
+    router.push(`/patient/${patientId.value}`);
+  }
+}
 
 const fetchPatients = async () => {
   try {

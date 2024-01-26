@@ -1,13 +1,11 @@
 import './assets/main.css'
 
 import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import App from './App.vue'
 import MainContainer from './components/MainContainer.vue'
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [
+const routes: RouteRecordRaw[] = [
     { path: '/', component: MainContainer },
     {
       path: '/patient/:patientId',
@@ -19,7 +17,14 @@ const router = createRouter({
       name: 'CreatePatient',
       component: () => import('./views/CreatePatient.vue')
     }
-  ]
+];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
 })
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+app.use(router)
+app.provide('router', router)
+app.mount('#app')
