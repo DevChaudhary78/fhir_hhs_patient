@@ -11,7 +11,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     },
     "strict": true,
     "noImplicitAny": true,
@@ -22,7 +24,7 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts",
@@ -30,7 +32,8 @@
     "src/**/*.tsx",
     "src/assets/interfaces/**/*.ts",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "src/**/*.vue"
   ],
   "exclude": [
     "node_modules"

@@ -30,3 +30,5 @@ coverage
 *.tsbuildinfo
 
 *.fhir.json
+
+package-lock.json

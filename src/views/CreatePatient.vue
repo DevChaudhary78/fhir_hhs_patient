@@ -79,8 +79,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
+import type { Router } from 'vue-router'
 import axios from 'axios';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+const router: Router = inject('router') as Router;
 
 const patientInfo = ref({
   firstName: "",
@@ -137,9 +141,21 @@ const createPatient = async () => {
         'Content-Type': 'application/fhir+json'
       }
     })
-    console.log(response)
+    toast(`User Created with ID: ${response.data.id}`, {
+      "theme": "colored",
+      "type": "success",
+      "dangerouslyHTMLString": true
+    })
+    setTimeout(() => {
+      router.push({ path: `/patient/${response.data.id}` })
+    }, 6000);
+
   } catch (error) {
-    console.error(`Error creating patient: ${error}`)
+    toast(`Error creating user: ${error}`, {
+      "theme": "colored",
+      "type": "error",
+      "dangerouslyHTMLString": true
+    })
   }
 }
 </script>
