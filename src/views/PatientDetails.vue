@@ -1,15 +1,19 @@
 <template>
   <div id="summary_container">
-
-    <div class="patient-summary">
+    <div v-if="patient?.id" class="patient-summary">
       <div class="header">
-
-        <h2 v-if="patient?.name">{{ patient?.name[0]?.given[0] }} {{ patient?.name[0]?.family }}</h2>
+        <h2 v-if="patient?.name">
+          {{ patient?.name[0]?.given[0] }} {{ patient?.name[0]?.family }}
+        </h2>
         <h2 v-else>Name Not Specified</h2>
 
-        <p v-if="patient?.identifier">Identifier: {{ patient?.identifier[0].value }}</p>
+        <p v-if="patient?.identifier && !patient.identifier[0].value">
+          Identifier: {{ patient?.identifier[0].value }}
+        </p>
         <p v-else>Identifier: Not Specified</p>
 
+        <p v-if="patient?.identifier">ID: {{ patient?.id }}</p>
+        <p v-else>ID: Not Specified</p>
       </div>
       <div class="body">
         <div class="section">
@@ -17,18 +21,17 @@
 
           <p v-if="patient?.telecom"><strong>Phone:</strong> {{ patient?.telecom[0].value }}</p>
           <p v-else><strong>Phone:</strong> Not Specified</p>
-
         </div>
         <div class="section">
           <h3>Address</h3>
 
-          <p v-if="patient?.address">
-            {{ patient?.address[0].line[0] }}, {{ patient?.address[0].city }},
-            {{ patient?.address[0].state }} {{ patient?.address[0].postalCode }},
-            {{ patient?.address[0].country }}
-          </p>
+          <h4 v-if="patient?.address" id="display_address">
+            <p>{{ patient?.address[0].line[0] }},</p>
+            <p>{{ patient?.address[0].city }},</p>
+            <p>{{ patient?.address[0].state }} {{ patient?.address[0].postalCode }},</p>
+            <p>{{ patient?.address[0].country }}</p>
+          </h4>
           <p v-else>Not Specifed</p>
-
         </div>
         <div class="section">
           <h3>Personal Information</h3>
@@ -41,25 +44,33 @@
         </div>
       </div>
     </div>
+    <div v-else>
+      <div class="header">
+        <h2>Patient Not Found</h2>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import axios from 'axios'
 
 import type { Patient } from '../assets/interfaces/Patient.ts'
 
 const patient = ref<Patient>()
-const route = useRoute();
+const route = useRoute()
 
-watch(() => route.params.patientId, () => {
-  fetchPatient();
-})
+watch(
+  () => route.params.patientId,
+  () => {
+    fetchPatient()
+  }
+)
 
 onMounted(() => {
-  fetchPatient();
+  fetchPatient()
 })
 
 const fetchPatient = async () => {
@@ -74,6 +85,11 @@ const fetchPatient = async () => {
 </script>
 
 <style scoped>
+#display_address {
+  padding: 0.7rem;
+  border-radius: 0.2rem;
+}
+
 #summary_container {
   height: 85vh;
   background: var(--main-container-bg);
@@ -114,4 +130,3 @@ h3 {
   margin-bottom: 10px;
 }
 </style>
-

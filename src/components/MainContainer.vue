@@ -38,7 +38,7 @@ import { ref, onMounted, inject } from 'vue'
 import axios from 'axios'
 
 import Card from './helpers/CardContainer.vue'
-import type { Router } from 'vue-router';
+import type { Router } from 'vue-router'
 
 interface ApiResponse {
   entry: []
@@ -50,14 +50,14 @@ interface Patient {
   }
 }
 
-const router = inject<Router>('router');
+const router = inject<Router>('router')
 const patients = ref<Patient[]>([])
 const loading = ref(true)
 const patientId = ref('')
 
 const patientDetails = () => {
   if (router) {
-    router.push(`/patient/${patientId.value}`);
+    router.push(`/patient/${patientId.value}`)
   }
 }
 
@@ -115,7 +115,7 @@ main #search {
   background: #90dbf4;
 }
 
-main>#card_container {
+main > #card_container {
   height: 90%;
   display: grid;
   padding: 1rem;

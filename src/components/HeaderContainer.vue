@@ -30,12 +30,12 @@ nav {
   width: 20%;
 }
 
-nav>ul {
+nav > ul {
   display: flex;
   justify-content: center;
 }
 
-nav>ul>a {
+nav > ul > a {
   text-decoration: none;
   font-size: 1.3rem;
   background: #22223b;
@@ -45,11 +45,11 @@ nav>ul>a {
   margin: 0 1rem;
 }
 
-nav>ul>a:hover {
+nav > ul > a:hover {
   scale: 1.05;
 }
 
-nav>ul>a>li {
+nav > ul > a > li {
   text-decoration: none;
   list-style: none;
 }

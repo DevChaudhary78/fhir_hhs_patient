@@ -5,11 +5,13 @@
         <h3>Personal Information</h3>
         <div class="first">
           <label for="first_name">First Name: </label>
-          <input type="text" id="first_name" placeholder="John" v-model="patientInfo.firstName" required> *
+          <input type="text" id="first_name" placeholder="John" v-model="patientInfo.firstName" required />
+          *
         </div>
         <div class="last">
           <label for="last_name">Last Name: </label>
-          <input type="text" id="last_name" placeholder="Doe" v-model="patientInfo.lastName" required> *
+          <input type="text" id="last_name" placeholder="Doe" v-model="patientInfo.lastName" required />
+          *
         </div>
         <div class="gender">
           <label for="gender">Gender: </label>
@@ -17,11 +19,12 @@
             <option value="" selected hidden disabled>Choose</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
-          </select> *
+          </select>
+          *
         </div>
         <div class="dob">
           <label for="dob">Birth Date: </label>
-          <input type="date" id="dob" v-model="patientInfo.dob" required> *
+          <input type="date" id="dob" v-model="patientInfo.dob" required /> *
         </div>
       </div>
 
@@ -29,12 +32,14 @@
         <h3>Contact</h3>
         <div class="email">
           <label for="email">Email: </label>
-          <input type="email" id="email" placeholder="john@doe.ca" v-model="patientInfo.email" required> *
+          <input type="email" id="email" placeholder="john@doe.ca" v-model="patientInfo.email" required />
+          *
         </div>
 
         <div class="phone">
           <label for="phone">Phone: </label>
-          <input type="tel" id="phone" placeholder="1234567890" v-model="patientInfo.phone" required> *
+          <input type="tel" id="phone" placeholder="1234567890" v-model="patientInfo.phone" required />
+          *
         </div>
       </div>
 
@@ -42,19 +47,23 @@
         <h3>Address</h3>
         <div class="street">
           <label for="street">Street: </label>
-          <input type="text" id="street" placeholder="188 Queen St. S." v-model="patientInfo.street" required> *
+          <input type="text" id="street" placeholder="188 Queen St. S." v-model="patientInfo.street" required />
+          *
         </div>
         <div class="city">
           <label for="city">City: </label>
-          <input type="text" id="city" placeholder="San Jose" v-model="patientInfo.city" required> *
+          <input type="text" id="city" placeholder="San Jose" v-model="patientInfo.city" required />
+          *
         </div>
         <div class="state">
           <label for="state">State/Province: </label>
-          <input type="text" id="state" placeholder="California" v-model="patientInfo.state" required> *
+          <input type="text" id="state" placeholder="California" v-model="patientInfo.state" required />
+          *
         </div>
         <div class="postal">
           <label for="postal">Postal/Zip Code: </label>
-          <input type="text" id="postal" placeholder="L9P3T9 / 342112" v-model="patientInfo.postal" required> *
+          <input type="text" id="postal" placeholder="L9P3T9 / 342112" v-model="patientInfo.postal" required />
+          *
         </div>
         <div class="country">
           <label for="postal">Country: </label>
@@ -63,34 +72,35 @@
             <option value="CA" selected>Canada</option>
             <option value="IN">India</option>
             <option value="US">USA</option>
-          </select> *
+          </select>
+          *
         </div>
       </div>
 
       <div id="identifier">
         <h3>Identifier</h3>
         <label for="identifier">Identifier: </label>
-        <input type="text" id="identifier" v-model="patientInfo.identifier" placeholder="AnyStringYouLike3">
+        <input type="text" id="identifier" v-model="patientInfo.identifier" placeholder="AnyStringYouLike3" />
       </div>
 
-      <input type="submit" value="Submit" id="submit">
+      <input type="submit" value="Submit" id="submit" />
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue';
+import { ref, inject } from 'vue'
 import type { Router } from 'vue-router'
-import axios from 'axios';
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
-const router: Router = inject('router') as Router;
+import axios from 'axios'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+const router: Router = inject('router') as Router
 
 const patientInfo = ref({
-  firstName: "",
-  lastName: "",
-  gender: "",
-  dob: "",
+  firstName: '',
+  lastName: '',
+  gender: '',
+  dob: '',
   email: '',
   phone: '',
   street: '',
@@ -98,43 +108,48 @@ const patientInfo = ref({
   state: '',
   postal: '',
   country: '',
-  identifier: '',
+  identifier: ''
 })
-
 
 const createPatient = async () => {
   try {
     const patient = {
-      "resourceType": "Patient",
-      "identifier": [{
-        "system": "https://example.org/fhir/sid/us-ssn",
-        "value": patientInfo.value.identifier
-      }],
-      "name": [{
-        "use": "official",
-        "family": patientInfo.value.lastName,
-        "given": [patientInfo.value.firstName]
-      }],
-      "telecom": [
+      resourceType: 'Patient',
+      identifier: [
         {
-          "system": "phone",
-          "value": patientInfo.value.phone
-        },
-        {
-          "system": "email",
-          "value": patientInfo.value.email
+          system: 'https://example.org/fhir/sid/us-ssn',
+          value: patientInfo.value.identifier
         }
       ],
-      "gender": patientInfo.value.gender,
-      "birthDate": patientInfo.value.dob,
-      "address": [{
-        "use": "work",
-        "line": [patientInfo.value.street],
-        "city": patientInfo.value.city,
-        "state": patientInfo.value.state,
-        "postalCode": patientInfo.value.postal,
-        "country": patientInfo.value.country
-      }]
+      name: [
+        {
+          use: 'official',
+          family: patientInfo.value.lastName,
+          given: [patientInfo.value.firstName]
+        }
+      ],
+      telecom: [
+        {
+          system: 'phone',
+          value: patientInfo.value.phone
+        },
+        {
+          system: 'email',
+          value: patientInfo.value.email
+        }
+      ],
+      gender: patientInfo.value.gender,
+      birthDate: patientInfo.value.dob,
+      address: [
+        {
+          use: 'work',
+          line: [patientInfo.value.street],
+          city: patientInfo.value.city,
+          state: patientInfo.value.state,
+          postalCode: patientInfo.value.postal,
+          country: patientInfo.value.country
+        }
+      ]
     }
     const response = await axios.post('https://hapi.fhir.org/baseR4/Patient', patient, {
       headers: {
@@ -142,19 +157,20 @@ const createPatient = async () => {
       }
     })
     toast(`User Created with ID: ${response.data.id}`, {
-      "theme": "colored",
-      "type": "success",
-      "dangerouslyHTMLString": true
+      theme: 'colored',
+      type: 'success',
+      autoClose: 3000,
+      dangerouslyHTMLString: true
     })
     setTimeout(() => {
       router.push({ path: `/patient/${response.data.id}` })
-    }, 6000);
-
+    }, 4000)
   } catch (error) {
     toast(`Error creating user: ${error}`, {
-      "theme": "colored",
-      "type": "error",
-      "dangerouslyHTMLString": true
+      theme: 'colored',
+      type: 'error',
+      autoClose: 3000,
+      dangerouslyHTMLString: true
     })
   }
 }
@@ -191,6 +207,11 @@ form {
   color: #e0e1dd;
   border-radius: 0.3rem;
   margin: 1rem;
+  cursor: pointer;
+}
+
+#submit:hover {
+  scale: 1.02;
 }
 
 h3 {
@@ -208,3 +229,4 @@ input {
   padding: 0.3rem;
 }
 </style>
+
