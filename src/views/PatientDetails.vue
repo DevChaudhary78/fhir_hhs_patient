@@ -4,7 +4,7 @@
     <div class="patient-summary">
       <div class="header">
 
-        <h2 v-if="patient?.name">{{ patient?.name[0].given[0] }} {{ patient?.name[0].family }}</h2>
+        <h2 v-if="patient?.name">{{ patient?.name[0]?.given[0] }} {{ patient?.name[0]?.family }}</h2>
         <h2 v-else>Name Not Specified</h2>
 
         <p v-if="patient?.identifier">Identifier: {{ patient?.identifier[0].value }}</p>
@@ -45,18 +45,22 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios'
 
 import type { Patient } from '../assets/interfaces/Patient.ts'
 
 const patient = ref<Patient>()
+const route = useRoute();
+
+watch(() => route.params.patientId, () => {
+  fetchPatient();
+})
 
 onMounted(() => {
   fetchPatient();
 })
-const route = useRoute();
 
 const fetchPatient = async () => {
   try {

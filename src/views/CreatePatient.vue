@@ -1,6 +1,6 @@
 <template>
   <div id="create_container">
-    <form>
+    <form @submit.prevent="createPatient">
       <div id="personal">
         <h3>Personal Information</h3>
         <div class="first">
@@ -20,7 +20,7 @@
           </select> *
         </div>
         <div class="dob">
-          <label for="dob">Gender: </label>
+          <label for="dob">Birth Date: </label>
           <input type="date" id="dob" v-model="patientInfo.dob" required> *
         </div>
       </div>
@@ -48,6 +48,10 @@
           <label for="city">City: </label>
           <input type="text" id="city" placeholder="San Jose" v-model="patientInfo.city" required> *
         </div>
+        <div class="state">
+          <label for="state">State/Province: </label>
+          <input type="text" id="state" placeholder="California" v-model="patientInfo.state" required> *
+        </div>
         <div class="postal">
           <label for="postal">Postal/Zip Code: </label>
           <input type="text" id="postal" placeholder="L9P3T9 / 342112" v-model="patientInfo.postal" required> *
@@ -66,7 +70,7 @@
       <div id="identifier">
         <h3>Identifier</h3>
         <label for="identifier">Identifier: </label>
-        <input type="text" id="identifier" placeholder="AnyStringYouLike3">
+        <input type="text" id="identifier" v-model="patientInfo.identifier" placeholder="AnyStringYouLike3">
       </div>
 
       <input type="submit" value="Submit" id="submit">
@@ -76,19 +80,68 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import axios from 'axios';
 
 const patientInfo = ref({
-  firstName: '',
-  lastName: '',
-  gender: '',
-  dob: '',
+  firstName: "",
+  lastName: "",
+  gender: "",
+  dob: "",
   email: '',
   phone: '',
   street: '',
   city: '',
+  state: '',
   postal: '',
   country: '',
+  identifier: '',
 })
+
+
+const createPatient = async () => {
+  try {
+    const patient = {
+      "resourceType": "Patient",
+      "identifier": [{
+        "system": "https://example.org/fhir/sid/us-ssn",
+        "value": patientInfo.value.identifier
+      }],
+      "name": [{
+        "use": "official",
+        "family": patientInfo.value.lastName,
+        "given": [patientInfo.value.firstName]
+      }],
+      "telecom": [
+        {
+          "system": "phone",
+          "value": patientInfo.value.phone
+        },
+        {
+          "system": "email",
+          "value": patientInfo.value.email
+        }
+      ],
+      "gender": patientInfo.value.gender,
+      "birthDate": patientInfo.value.dob,
+      "address": [{
+        "use": "work",
+        "line": [patientInfo.value.street],
+        "city": patientInfo.value.city,
+        "state": patientInfo.value.state,
+        "postalCode": patientInfo.value.postal,
+        "country": patientInfo.value.country
+      }]
+    }
+    const response = await axios.post('https://hapi.fhir.org/baseR4/Patient', patient, {
+      headers: {
+        'Content-Type': 'application/fhir+json'
+      }
+    })
+    console.log(response)
+  } catch (error) {
+    console.error(`Error creating patient: ${error}`)
+  }
+}
 </script>
 
 <style scoped>
